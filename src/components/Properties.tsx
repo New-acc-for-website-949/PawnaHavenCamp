@@ -61,8 +61,8 @@ const Properties = () => {
 
           {/* Category Tabs - Restored to original simpler style */}
         </div>
-        <div className="sticky top-[80px] z-40 flex justify-center w-full px-4 mb-8 pointer-events-none">
-          <div className="flex w-full max-w-md p-1 bg-secondary/90 rounded-2xl backdrop-blur-md border border-border/30 shadow-xl pointer-events-auto">
+        <div className="sticky top-[80px] z-40 flex justify-center w-full px-5 mb-8 pointer-events-none">
+          <div className="flex w-full p-1 bg-secondary/90 rounded-2xl backdrop-blur-md border border-border/30 shadow-xl pointer-events-auto">
             {categories.map((category) => (
               <button
                 key={category}
