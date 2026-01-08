@@ -9,6 +9,7 @@ import PropertyDetails from "./pages/PropertyDetails";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import DemoPayment from "./pages/DemoPayment";
+import TicketPage from "./pages/TicketPage";
 import NotFound from "./pages/NotFound";
 import ScrollRestoration from "./components/ScrollRestoration";
 
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/payment/demo" element={<DemoPayment />} />
+            <Route path="/ticket/:ticketId" element={<TicketPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
