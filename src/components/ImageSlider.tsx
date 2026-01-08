@@ -10,30 +10,31 @@ interface ImageSliderProps {
 
 const ImageSlider = ({ images, title }: ImageSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const touchStartX = useRef<number | null>(null);
-  const touchEndX = useRef<number | null>(null);
-
-  const minSwipeDistance = 50;
 
   const onTouchStart = (e: React.TouchEvent) => {
-    touchEndX.current = null;
     touchStartX.current = e.targetTouches[0].clientX;
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
+    if (touchStartX.current === null) return;
+    const currentX = e.targetTouches[0].clientX;
+    const diff = currentX - touchStartX.current;
+    setDragOffset(diff);
   };
 
   const onTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const distance = touchStartX.current - touchEndX.current;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe) {
+    if (touchStartX.current === null) return;
+    
+    if (dragOffset < -50) {
       goToNext();
-    } else if (isRightSwipe) {
+    } else if (dragOffset > 50) {
       goToPrevious();
     }
+    
+    setDragOffset(0);
+    touchStartX.current = null;
   };
 
   const goToPrevious = () => {
@@ -50,33 +51,34 @@ const ImageSlider = ({ images, title }: ImageSliderProps) => {
 
   return (
     <div 
-      className="relative w-full h-96 md:h-[500px] lg:h-[600px] bg-secondary rounded-2xl overflow-hidden group"
+      className="relative w-full h-96 md:h-[500px] lg:h-[600px] bg-black rounded-2xl overflow-hidden group"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      style={{ touchAction: 'pan-y' }}
     >
-      {/* Main Image */}
-      <div className="relative w-full h-full overflow-hidden">
+      {/* Main Image Strip */}
+      <div 
+        className="flex h-full w-full"
+        style={{ 
+          transform: `translateX(calc(-${currentIndex * 100}% + ${dragOffset}px))`,
+          transition: touchStartX.current !== null ? 'none' : 'transform 0.4s cubic-bezier(0.2, 0, 0, 1)'
+        }}
+      >
         {images.map((img, index) => (
-          <img
-            key={index}
-            src={getOptimizedImageUrl(img, 1200)}
-            alt={`${title} - Image ${index + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out transform ${
-              index === currentIndex 
-                ? "opacity-100 translate-x-0 scale-100" 
-                : index < currentIndex
-                  ? "opacity-0 -translate-x-full scale-110"
-                  : "opacity-0 translate-x-full scale-110"
-            }`}
-            data-testid={`img-slider-${index}`}
-            loading="lazy"
-          />
+          <div key={index} className="flex-shrink-0 w-full h-full relative">
+            <img
+              src={getOptimizedImageUrl(img, 1200)}
+              alt={`${title} - Image ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
         ))}
-
-        {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
       </div>
+
+      {/* Dark overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none z-10" />
 
       {/* Previous Button */}
       {images.length > 1 && (

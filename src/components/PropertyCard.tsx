@@ -38,56 +38,35 @@ const PropertyCard = ({
 }: PropertyCardProps) => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
-  const touchEndX = useRef<number | null>(null);
   
   const displayImages = images.length > 0 ? images : [image];
   const navigationId = slug || id;
-
-  const handleShare = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const shareUrl = `${window.location.origin}/property/${navigationId}`;
-    const text = `🏡 *${title}*\n📍 ${location}\n💰 *${price}* /${priceNote}\n\nCheck out this property:\n${shareUrl}`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-  };
-
-  const handleBookNow = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(`https://api.whatsapp.com/send?phone=918669505727&text=I'm interested in booking ${encodeURIComponent(title)}`, '_blank');
-  };
-
-  const nextImage = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentImageIndex((prev) => (prev === displayImages.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevImage = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentImageIndex((prev) => (prev === 0 ? displayImages.length - 1 : prev - 1));
-  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
+    if (touchStartX.current === null) return;
+    const currentX = e.targetTouches[0].clientX;
+    const diff = currentX - touchStartX.current;
+    setDragOffset(diff);
   };
 
   const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) {
+    if (touchStartX.current === null) return;
+    
+    if (dragOffset < -50) {
       setCurrentImageIndex((prev) => (prev === displayImages.length - 1 ? 0 : prev + 1));
-    } else if (diff < -50) {
+    } else if (dragOffset > 50) {
       setCurrentImageIndex((prev) => (prev === 0 ? displayImages.length - 1 : prev - 1));
     }
+    
+    setDragOffset(0);
     touchStartX.current = null;
-    touchEndX.current = null;
   };
 
   const handleNavigate = () => {
@@ -101,26 +80,30 @@ const PropertyCard = ({
       <div className="bg-card rounded-[32px] overflow-hidden border border-border/10 hover:border-primary/30 transition-all duration-300 shadow-sm">
         {/* Image Container */}
         <div 
-          className="relative h-64 overflow-hidden"
-          style={{ touchAction: 'auto' }}
+          ref={containerRef}
+          className="relative h-64 overflow-hidden bg-black"
+          style={{ touchAction: 'pan-y' }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {displayImages.map((img, index) => (
-            <img
-              key={index}
-              src={getOptimizedImageUrl(img, 800)}
-              alt={title}
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out transform ${
-                index === currentImageIndex 
-                  ? "opacity-100 translate-x-0 scale-100" 
-                  : index < currentImageIndex
-                    ? "opacity-0 -translate-x-full scale-105"
-                    : "opacity-0 translate-x-full scale-105"
-              } group-hover:scale-110`}
-            />
-          ))}
+          <div 
+            className="flex h-full w-full transition-transform duration-300 ease-out"
+            style={{ 
+              transform: `translateX(calc(-${currentImageIndex * 100}% + ${dragOffset}px))`,
+              transition: touchStartX.current !== null ? 'none' : 'transform 0.3s ease-out'
+            }}
+          >
+            {displayImages.map((img, index) => (
+              <div key={index} className="flex-shrink-0 w-full h-full relative">
+                <img
+                  src={getOptimizedImageUrl(img, 800)}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
           
           {/* Availability Badge */}
           <div 
