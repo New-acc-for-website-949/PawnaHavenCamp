@@ -95,17 +95,17 @@ const PropertyCard = ({
   };
 
   return (
-    <div className="group cursor-pointer" onClick={handleNavigate}>
-      <div className="bg-card rounded-2xl overflow-hidden border border-border/30 hover:border-primary/30 transition-all duration-300">
-        {/* Image Container - Reduced Height for more compact look */}
+    <div className="group cursor-pointer px-4 mb-6" onClick={handleNavigate}>
+      <div className="bg-card rounded-[40px] overflow-hidden border border-border/10 hover:border-primary/30 transition-all duration-300 shadow-sm">
+        {/* Image Container */}
         <div 
-          className="relative h-56 overflow-hidden"
+          className="relative h-72 overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           <img
-            src={getOptimizedImageUrl(displayImages[currentImageIndex], 500)}
+            src={getOptimizedImageUrl(displayImages[currentImageIndex], 800)}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
