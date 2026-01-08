@@ -59,7 +59,7 @@ const Properties = () => {
           </div>
 
           {/* Category Tabs - Restored to original simpler style */}
-          <div className="sticky top-[80px] z-40 inline-flex p-1 bg-secondary/80 rounded-2xl backdrop-blur-md border border-border/30 shadow-xl">
+          <div className="sticky top-20 z-40 inline-flex p-1 bg-secondary/80 rounded-2xl backdrop-blur-md border border-border/30 shadow-xl">
             {categories.map((category) => (
               <button
                 key={category}
