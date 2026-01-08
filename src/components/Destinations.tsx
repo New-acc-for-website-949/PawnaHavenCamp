@@ -71,7 +71,17 @@ const Destinations = () => {
                       <span className="text-sm font-medium text-foreground">
                         <span className="text-gradient-gold font-bold">{destination.properties}</span> Properties
                       </span>
-                      <button className="text-sm font-medium text-primary elegant-underline">
+                      <button 
+                        onClick={() => {
+                          const targetCategory = destination.name === "Lonavala" ? "villa" : "camping";
+                          const element = document.getElementById(`category-${targetCategory}`);
+                          if (element) {
+                            element.click();
+                            document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                        className="text-sm font-medium text-primary elegant-underline"
+                      >
                         Explore →
                       </button>
                     </div>

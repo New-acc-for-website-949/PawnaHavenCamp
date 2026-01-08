@@ -184,6 +184,15 @@ const PropertyCard = ({
             {title}
           </h3>
 
+          {/* Amenities Row */}
+          <div className="flex items-center gap-3 mb-4 overflow-x-auto no-scrollbar pb-1">
+            {amenities.slice(0, 3).map((amenity, i) => (
+              <span key={i} className="text-[10px] text-muted-foreground whitespace-nowrap bg-secondary/30 px-2 py-0.5 rounded-full">
+                {amenity}
+              </span>
+            ))}
+          </div>
+
           <div className="flex items-center justify-between pt-3 border-t border-border/20">
             <div className="flex items-baseline gap-1">
               <span className="text-xl font-bold text-gradient-gold">₹{price}</span>

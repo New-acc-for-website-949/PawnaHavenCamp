@@ -42,7 +42,7 @@ const Properties = () => {
     ? properties
     : properties.filter((p) => p.category === selectedCategory);
 
-  const categories = ["all", "camping", "villa", "cottage"];
+  const categories = ["all", "camping", "cottage", "villa"];
 
   return (
     <section id="properties" className="py-12 md:py-20">
@@ -59,10 +59,11 @@ const Properties = () => {
           </div>
 
           {/* Category Tabs - Restored to original simpler style */}
-          <div className="inline-flex p-1 bg-secondary/50 rounded-2xl backdrop-blur-sm border border-border/30">
+          <div className="sticky top-[80px] z-40 inline-flex p-1 bg-secondary/80 rounded-2xl backdrop-blur-md border border-border/30 shadow-xl">
             {categories.map((category) => (
               <button
                 key={category}
+                id={`category-${category}`}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                   selectedCategory === category
