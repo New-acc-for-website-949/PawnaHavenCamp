@@ -5,28 +5,44 @@ import Destinations from "@/components/Destinations";
 import Properties from "@/components/Properties";
 import FloatingContact from "@/components/FloatingContact";
 import Footer from "@/components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const Index = () => {
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
   useEffect(() => {
-    // We use a small delay to ensure all property cards have rendered
-    // and the page height is correct before restoring scroll
     const savedPosition = sessionStorage.getItem("homeScrollPosition");
-    if (savedPosition) {
-      const restoreScroll = () => {
+    
+    // Set a 0.5s timer for the loader
+    const loaderTimer = setTimeout(() => {
+      setIsInitialLoading(false);
+      
+      // Restore scroll immediately after loader disappears
+      if (savedPosition) {
         window.scrollTo({
           top: parseInt(savedPosition),
           behavior: "instant"
         });
-        // Clear it once restored so regular refreshes start at top
         sessionStorage.removeItem("homeScrollPosition");
-      };
-      
-      // Delay slightly to allow content/images to render
-      const timeoutId = setTimeout(restoreScroll, 100);
-      return () => clearTimeout(timeoutId);
-    }
+      }
+    }, 500);
+
+    return () => clearTimeout(loaderTimer);
   }, []);
+
+  if (isInitialLoading) {
+    return (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground animate-pulse">
+            LoonCamp
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
