@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PropertyDetails from "./pages/PropertyDetails";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import DemoPayment from "./pages/DemoPayment";
 import NotFound from "./pages/NotFound";
 import ScrollRestoration from "./components/ScrollRestoration";
 
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/property/:propertyId" element={<PropertyDetails />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/payment/demo" element={<DemoPayment />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
