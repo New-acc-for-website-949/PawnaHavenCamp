@@ -107,11 +107,20 @@ const PropertyCard = ({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <img
-            src={getOptimizedImageUrl(displayImages[currentImageIndex], 800)}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          {displayImages.map((img, index) => (
+            <img
+              key={index}
+              src={getOptimizedImageUrl(img, 800)}
+              alt={title}
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out transform ${
+                index === currentImageIndex 
+                  ? "opacity-100 translate-x-0 scale-100" 
+                  : index < currentImageIndex
+                    ? "opacity-0 -translate-x-full scale-105"
+                    : "opacity-0 translate-x-full scale-105"
+              } group-hover:scale-110`}
+            />
+          ))}
           
           {/* Availability Badge */}
           <div 
@@ -139,18 +148,18 @@ const PropertyCard = ({
 
           {/* Image Navigation Arrows */}
           {displayImages.length > 1 && (
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="flex justify-between items-center absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 z-30 pointer-events-none">
               <button 
                 onClick={prevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm z-10"
+                className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md border border-white/30 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg flex items-center justify-center"
               >
-                <ChevronLeft className="w-3.5 h-3.5" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
               <button 
                 onClick={nextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm z-10"
+                className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md border border-white/30 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg flex items-center justify-center"
               >
-                <ChevronRight className="w-3.5 h-3.5" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           )}

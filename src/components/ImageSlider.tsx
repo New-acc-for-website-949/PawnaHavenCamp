@@ -56,43 +56,48 @@ const ImageSlider = ({ images, title }: ImageSliderProps) => {
       onTouchEnd={onTouchEnd}
     >
       {/* Main Image */}
-      <div className="relative w-full h-full">
-        <img
-          src={getOptimizedImageUrl(images[currentIndex], 1200)}
-          alt={`${title} - Image ${currentIndex + 1}`}
-          className="w-full h-full object-cover transition-opacity duration-500"
-          data-testid={`img-slider-${currentIndex}`}
-          loading="lazy"
-        />
+      <div className="relative w-full h-full overflow-hidden">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={getOptimizedImageUrl(img, 1200)}
+            alt={`${title} - Image ${index + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out transform ${
+              index === currentIndex 
+                ? "opacity-100 translate-x-0 scale-100" 
+                : index < currentIndex
+                  ? "opacity-0 -translate-x-full scale-110"
+                  : "opacity-0 translate-x-full scale-110"
+            }`}
+            data-testid={`img-slider-${index}`}
+            loading="lazy"
+          />
+        ))}
 
         {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
       </div>
 
       {/* Previous Button */}
       {images.length > 1 && (
-        <Button
-          size="icon"
-          variant="ghost"
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full transition-all"
+        <button
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md border border-white/30 transition-all duration-300 hover:scale-110 active:scale-95 shadow-xl z-20 flex items-center justify-center"
           onClick={goToPrevious}
           data-testid="button-slider-prev"
         >
           <ChevronLeft className="w-6 h-6" />
-        </Button>
+        </button>
       )}
 
       {/* Next Button */}
       {images.length > 1 && (
-        <Button
-          size="icon"
-          variant="ghost"
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full transition-all"
+        <button
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md border border-white/30 transition-all duration-300 hover:scale-110 active:scale-95 shadow-xl z-20 flex items-center justify-center"
           onClick={goToNext}
           data-testid="button-slider-next"
         >
           <ChevronRight className="w-6 h-6" />
-        </Button>
+        </button>
       )}
 
       {/* Image Counter */}
