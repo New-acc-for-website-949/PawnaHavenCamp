@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Users, MessageCircle } from "lucide-react";
+import { Calendar as CalendarIcon, Users, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BookingFormProps {
@@ -15,6 +16,7 @@ interface BookingFormProps {
 }
 
 export function BookingForm({ propertyName, pricePerPerson, onClose }: BookingFormProps) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -41,20 +43,22 @@ export function BookingForm({ propertyName, pricePerPerson, onClose }: BookingFo
       return;
     }
 
-    const message = `*Booking Confirmation Request*\n\n` +
-      `🏡 *Property:* ${propertyName}\n` +
-      `👤 *Customer:* ${formData.name}\n` +
-      `📱 *Mobile:* ${formData.mobile}\n` +
-      `👥 *Persons:* ${formData.persons}\n` +
-      `📅 *Check-in:* ${format(formData.checkIn, "PPP")}\n` +
-      `📅 *Check-out:* ${format(formData.checkOut, "PPP")}\n\n` +
-      `💰 *Total Price:* ₹${totalPrice}\n` +
-      `💳 *Advance Payment:* ₹${advanceAmount}\n\n` +
-      `Please send the QR code for advance payment.`;
-
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=918669505727&text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
     if (onClose) onClose();
+    
+    // Navigate to demo payment page with state
+    navigate("/payment/demo", { 
+      state: { 
+        bookingData: {
+          ...formData,
+          propertyTitle: propertyName,
+          checkIn: format(formData.checkIn, "PPP"),
+          checkOut: format(formData.checkOut, "PPP"),
+          totalPrice,
+          advanceAmount
+        },
+        amount: advanceAmount.toString()
+      } 
+    });
   };
 
   return (
@@ -183,8 +187,8 @@ export function BookingForm({ propertyName, pricePerPerson, onClose }: BookingFo
         className="w-full h-14 rounded-xl text-lg font-bold gap-2" 
         onClick={handleBook}
       >
-        <MessageCircle className="w-5 h-5" />
-        Confirm & Book on WhatsApp
+        <CreditCard className="w-5 h-5" />
+        Pay Advance & Confirm
       </Button>
     </div>
   );
