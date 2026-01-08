@@ -23,6 +23,10 @@ author = "agent"
 task = "workflow.run"
 args = "Start application"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start Backend"
+
 [[workflows.workflow]]
 name = "Start application"
 author = "agent"
@@ -35,6 +39,24 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow]]
+name = "Start Backend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && npm install --legacy-peer-deps && node server.js"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
+PORT = "5001"
+JWT_SECRET = "looncamp-secret-2026-key-change-later"
