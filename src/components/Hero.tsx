@@ -1,11 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Star, Play } from "lucide-react";
 import heroImage from "@/assets/hero-resort.jpg";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const scrollToProperties = () => {
     document.querySelector("#properties")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const { data: properties } = useQuery({
+    queryKey: ['/api/properties'],
+    queryFn: async () => {
+      const response = await axios.get(`${window.location.origin.replace('5000', '5001')}/api/properties`);
+      return response.data;
+    }
+  });
+
+  const propertyCount = properties?.length || 0;
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -58,7 +72,7 @@ const Hero = () => {
               variant="outline"
               size="lg"
               className="border-foreground/20 text-foreground hover:bg-foreground/5 font-medium px-8 h-14 text-lg gap-2"
-              onClick={() => window.open("https://www.youtube.com/watch?v=example", "_blank")}
+              onClick={() => navigate('/videos')}
             >
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                 <Play className="w-4 h-4 text-primary fill-primary" />
@@ -70,7 +84,7 @@ const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap gap-8 md:gap-12 opacity-0 animate-fade-up delay-400">
             <div className="flex flex-col">
-              <span className="font-display text-4xl md:text-5xl font-bold text-gradient-gold">50+</span>
+              <span className="font-display text-4xl md:text-5xl font-bold text-gradient-gold">{propertyCount || '50'}+</span>
               <span className="text-sm text-muted-foreground mt-1">Luxury Properties</span>
             </div>
             <div className="w-px bg-border/50 hidden md:block" />

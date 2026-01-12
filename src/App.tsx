@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import PropertyDetails from "./pages/PropertyDetails";
+import VideoGallery from "./pages/VideoGallery";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import DemoPayment from "./pages/DemoPayment";
@@ -26,6 +27,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/property/:propertyId" element={<PropertyDetails />} />
+            <Route path="/videos" element={<VideoGallery />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/payment/demo" element={<DemoPayment />} />
