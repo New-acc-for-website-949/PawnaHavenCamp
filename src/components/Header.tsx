@@ -43,12 +43,12 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-gold-light flex items-center justify-center shadow-gold">
-                <span className="text-primary-foreground font-display text-xl font-bold">L</span>
+                <span className="text-primary-foreground font-display text-xl font-bold">P</span>
               </div>
             </div>
             <div className="flex flex-col">
               <span className="font-display text-2xl font-bold tracking-wide text-foreground">
-                LoonCamp
+                PawnaHavenCamp
               </span>
               <span className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground -mt-1">
                 Luxury Escapes
@@ -71,14 +71,14 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:+918669505727">
+            <a href="tel:+918806092609">
               <Button
                 variant="ghost"
                 size="sm"
                 className="text-foreground/70 hover:text-primary gap-2"
               >
                 <Phone className="w-4 h-4" />
-                <span className="font-medium">+91 86695 05727</span>
+                <span className="font-medium">+91 88060 92609</span>
               </Button>
             </a>
             <Button
@@ -119,9 +119,9 @@ const Header = () => {
               </button>
             ))}
             <div className="section-divider my-2" />
-            <a href="tel:+918669505727" className="flex items-center gap-3 text-foreground/70">
+            <a href="tel:+918806092609" className="flex items-center gap-3 text-foreground/70">
               <Phone className="w-5 h-5 text-primary" />
-              <span className="font-medium">+91 86695 05727</span>
+              <span className="font-medium">+91 88060 92609</span>
             </a>
             <Button
               onClick={() => scrollToSection("#properties")}

@@ -117,8 +117,8 @@ const TicketPage = () => {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground uppercase font-semibold">Host Details</p>
-                <p className="font-medium text-sm">LoonCamp.shop</p>
-                <p className="text-sm text-muted-foreground">+91 8669505727</p>
+                <p className="font-medium text-sm">PawnaHavenCamp.com</p>
+                <p className="text-sm text-muted-foreground">+91 8806092609</p>
               </div>
             </div>
           </div>

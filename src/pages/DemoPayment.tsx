@@ -48,8 +48,8 @@ const DemoPayment = () => {
       });
 
       // Automated Triple WhatsApp Notification System (Guest, Property Owner, Host)
-      const TEST_NUMBER = "918669505727";
-      const ticketId = `LC-${orderId.split('-')[1]}`;
+      const TEST_NUMBER = "918806092609";
+      const ticketId = `PHC-${orderId.split('-')[1]}`;
       const dueAmount = bookingData.totalPrice - bookingData.advanceAmount;
       const mapLink = "https://maps.app.goo.gl/PawnaLake";
 
@@ -70,8 +70,8 @@ const DemoPayment = () => {
           const ticketUrl = `${window.location.origin}/ticket/${ticketId}`;
           const propertyName = ticketResponse.data.data.property_name;
 
-          const commonHeader = `*🏡 LOONCAMP E-TICKET*\n📍 *Property:* ${propertyName}\n🔖 *Booking ID:* ${ticketId}\n\n`;
-          const commonFooter = `\n🔗 *Ticket Link:* ${ticketUrl}\n📍 *Location:* ${mapLink}\nHost: LoonCamp.shop | +${TEST_NUMBER}`;
+          const commonHeader = `*🏡 PAWNAHAVENCAMP E-TICKET*\n📍 *Property:* ${propertyName}\n🔖 *Booking ID:* ${ticketId}\n\n`;
+          const commonFooter = `\n🔗 *Ticket Link:* ${ticketUrl}\n📍 *Location:* ${mapLink}\nHost: PawnaHavenCamp.com | +${TEST_NUMBER}`;
 
           const guestMsg = `${commonHeader}👤 *Guest:* ${bookingData.name}\n📅 *Check-in:* ${bookingData.checkIn}\n💰 *Paid:* ₹${bookingData.advanceAmount}\n🔴 *DUE:* ₹${dueAmount}${commonFooter}`;
           

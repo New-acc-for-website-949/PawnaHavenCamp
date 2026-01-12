@@ -37,9 +37,9 @@ export function ETicket({ bookingData, paymentInfo }: ETicketProps) {
   const ticketRef = useRef<HTMLDivElement>(null);
 
   const handleShare = () => {
-    const text = `*🏡 LOONCAMP E-TICKET*\n\n` +
+    const text = `*🏡 PAWNAHAVENCAMP E-TICKET*\n\n` +
       `📍 *Property:* ${bookingData.propertyTitle}\n` +
-      `🔖 *Booking ID:* LC-${paymentInfo.orderId.split('-')[1]}\n\n` +
+      `🔖 *Booking ID:* PHC-${paymentInfo.orderId.split('-')[1]}\n\n` +
       `👤 *Guest:* ${bookingData.name}\n` +
       `📅 *Check-in:* ${bookingData.checkIn} (11:00 AM)\n` +
       `📅 *Check-out:* ${bookingData.checkOut} (10:00 AM)\n\n` +
@@ -50,9 +50,9 @@ export function ETicket({ bookingData, paymentInfo }: ETicketProps) {
       `*Paytm Transaction Details:*\n` +
       `• Order ID: ${paymentInfo.orderId}\n` +
       `• Status: ${paymentInfo.status}\n\n` +
-      `Host: LoonCamp.shop | +918669505727`;
+      `Host: PawnaHavenCamp.com | +918806092609`;
 
-    window.open(`https://api.whatsapp.com/send?phone=918669505727&text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=918806092609&text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -64,10 +64,10 @@ export function ETicket({ bookingData, paymentInfo }: ETicketProps) {
             <CheckCircle2 className="w-32 h-32 -mr-16 -mt-16" />
           </div>
           <h1 className="text-3xl font-display font-bold mb-1 tracking-tight">{bookingData.propertyTitle}</h1>
-          <p className="text-sm opacity-80 uppercase tracking-[0.3em] font-medium">LoonCamp Luxury Stays</p>
+          <p className="text-sm opacity-80 uppercase tracking-[0.3em] font-medium">PawnaHavenCamp Luxury Stays</p>
           <div className="mt-4 inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-xs font-bold border border-white/20">
             <Hash className="w-3 h-3" />
-            Booking ID: LC-{paymentInfo.orderId.split('-')[1]}
+            Booking ID: PHC-{paymentInfo.orderId.split('-')[1]}
           </div>
         </div>
 
@@ -133,10 +133,10 @@ export function ETicket({ bookingData, paymentInfo }: ETicketProps) {
               </div>
               <div className="flex items-center justify-between font-bold text-sm">
                 <span className="flex items-center gap-2">
-                  <ExternalLink className="w-3 h-3 text-primary" /> LoonCamp.shop
+                  <ExternalLink className="w-3 h-3 text-primary" /> PawnaHavenCamp.com
                 </span>
                 <span className="flex items-center gap-2">
-                  <Phone className="w-3 h-3 text-primary" /> 8669505727
+                  <Phone className="w-3 h-3 text-primary" /> 8806092609
                 </span>
               </div>
             </div>

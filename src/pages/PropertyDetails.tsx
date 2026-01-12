@@ -208,7 +208,7 @@ const PropertyDetails = () => {
                 <Button
                   variant="outline"
                   className="flex flex-col items-center gap-3 h-32 rounded-3xl border-green-500/30 hover:bg-green-50 hover:border-green-500 text-green-600 transition-all group"
-                  onClick={() => window.open(`https://api.whatsapp.com/send?phone=918669505727`, '_blank')}
+                  onClick={() => window.open(`https://api.whatsapp.com/send?phone=918806092609`, '_blank')}
                 >
                   <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <MessageCircle className="w-6 h-6" />
@@ -218,7 +218,7 @@ const PropertyDetails = () => {
                 <Button
                   variant="outline"
                   className="flex flex-col items-center gap-3 h-32 rounded-3xl border-primary/30 hover:bg-primary/5 hover:border-primary text-primary transition-all group"
-                  onClick={() => window.open(`tel:+918669505727`, '_self')}
+                  onClick={() => window.open(`tel:+918806092609`, '_self')}
                 >
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Phone className="w-6 h-6" />
@@ -246,7 +246,7 @@ const PropertyDetails = () => {
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Inquiry Support</p>
-              <p className="font-bold text-foreground">{propertyData.contact || "+91 8669505727"}</p>
+              <p className="font-bold text-foreground">{propertyData.contact || "+91 8806092609"}</p>
             </div>
           </div>
         </div>
@@ -257,7 +257,7 @@ const PropertyDetails = () => {
   return (
     <>
       <Helmet>
-        <title>{propertyData.title} - Luxury {propertyData.category === 'camping' ? 'Pawna Camping' : 'Lonavala Booking'} | LoonCamp</title>
+        <title>{propertyData.title} - Luxury {propertyData.category === 'camping' ? 'Pawna Camping' : 'Lonavala Booking'} | PawnaHavenCamp</title>
         <meta name="description" content={`Book ${propertyData.title} at ${propertyData.location}. Luxury ${propertyData.category} with ${propertyData.amenities.slice(0, 5).join(', ')}. ${propertyData.description.substring(0, 100)}...`} />
         {/* Open Graph / WhatsApp Preview */}
         <meta property="og:type" content="website" />
@@ -289,7 +289,7 @@ const PropertyDetails = () => {
                 className="rounded-full border-border/50 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
                 onClick={() => {
                   const shareUrl = window.location.href;
-                  const text = `🏡 *${propertyData.title}*\n📍 ${propertyData.location}\n💰 *${propertyData.price}* ${propertyData.priceNote}\n\nCheck out this beautiful property on LoonCamp:\n${shareUrl}`;
+                  const text = `🏡 *${propertyData.title}*\n📍 ${propertyData.location}\n💰 *${propertyData.price}* ${propertyData.priceNote}\n\nCheck out this beautiful property on PawnaHavenCamp:\n${shareUrl}`;
                   window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
                 }}
               >

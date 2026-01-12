@@ -105,7 +105,7 @@ const AdminLogin = () => {
             <Shield className="w-10 h-10 text-primary-foreground" />
           </div>
           <h1 className="font-display text-4xl font-semibold text-foreground mb-2">
-            LoonCamp
+            PawnaHavenCamp
           </h1>
           <p className="text-muted-foreground flex items-center justify-center gap-2">
             <Sparkles className="w-4 h-4 text-primary" />
@@ -132,7 +132,7 @@ const AdminLogin = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@looncamp.shop"
+                  placeholder="admin@pawnahavencamp.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="h-12 bg-secondary/50 border-border/50 rounded-xl pl-4 pr-4 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"

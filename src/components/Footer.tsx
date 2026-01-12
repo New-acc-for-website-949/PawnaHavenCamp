@@ -19,9 +19,9 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-gold-light flex items-center justify-center">
-                <span className="text-primary-foreground font-display text-xl font-bold">L</span>
+                <span className="text-primary-foreground font-display text-xl font-bold">P</span>
               </div>
-              <span className="font-display text-2xl font-bold text-foreground">LoonCamp</span>
+              <span className="font-display text-2xl font-bold text-foreground">PawnaHavenCamp</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Curating extraordinary stays for discerning travelers. Experience luxury in nature's embrace.
@@ -97,14 +97,14 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:+918669505727" className="text-muted-foreground text-sm hover:text-primary transition-colors">
-                  +91 86695 05727
+                <a href="tel:+918806092609" className="text-muted-foreground text-sm hover:text-primary transition-colors">
+                  +91 88060 92609
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:hello@looncamp.com" className="text-muted-foreground text-sm hover:text-primary transition-colors">
-                  hello@looncamp.com
+                <a href="mailto:hrushikeshmore2609@gmail.com" className="text-muted-foreground text-sm hover:text-primary transition-colors">
+                  hrushikeshmore2609@gmail.com
                 </a>
               </div>
             </div>
@@ -134,7 +134,7 @@ const Footer = () => {
       <div className="border-t border-border/30">
         <div className="container mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            © 2024 LoonCamp. All rights reserved.
+            © 2024 PawnaHavenCamp. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link to="/privacy" className="text-muted-foreground text-sm hover:text-primary transition-colors">

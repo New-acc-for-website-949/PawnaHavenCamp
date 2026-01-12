@@ -39,7 +39,7 @@ const Index = () => {
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-10 w-10 animate-spin text-primary" />
           <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground animate-pulse">
-            LoonCamp
+            PawnaHavenCamp
           </span>
         </div>
       </div>
@@ -49,10 +49,10 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>LoonCamp - #1 Luxury Pawna Lake Camping & Lonavala Villa Booking</title>
+        <title>PawnaHavenCamp - #1 Luxury Pawna Lake Camping & Lonavala Villa Booking</title>
         <meta
           name="description"
-          content="LoonCamp offers the best luxury glamping domes at Pawna Lake and premium villas in Lonavala. Book lakeside camping with pool, AC, and meals. Top-rated stays near Mumbai & Pune."
+          content="PawnaHavenCamp offers the best luxury glamping domes at Pawna Lake and premium villas in Lonavala. Book lakeside camping with pool, AC, and meals. Top-rated stays near Mumbai & Pune."
         />
         <meta
           name="keywords"

@@ -99,7 +99,7 @@ const PropertyCard = ({
 
   const handleBookNow = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const phone = "+918669505727";
+    const phone = "+918806092609";
     const message = encodeURIComponent(`Hi, I'm interested in booking ${title}`);
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   };

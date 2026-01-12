@@ -1,8 +1,8 @@
-# LoonCamp - Luxury Resort Booking Platform
+# PawnaHavenCamp - Luxury Resort Booking Platform
 
 ## Overview
 
-LoonCamp is a luxury resort and cottage booking platform focused on properties near Pawna Lake and Lonavala, India. The application serves as a showcase and booking portal for premium glamping domes, cottages, and villas, featuring property listings with detailed information, image galleries, and direct contact integration via WhatsApp and phone.
+PawnaHavenCamp is a luxury resort and cottage booking platform focused on properties near Pawna Lake and Lonavala, India. The application serves as a showcase and booking portal for premium glamping domes, cottages, and villas, featuring property listings with detailed information, image galleries, and direct contact integration via WhatsApp and phone.
 
 ## User Preferences
 

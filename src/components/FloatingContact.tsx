@@ -5,7 +5,7 @@ const FloatingContact = () => {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       {/* WhatsApp */}
       <a
-        href="https://api.whatsapp.com/send?phone=918669505727&text=Hello! I'm interested in booking a stay."
+        href="https://api.whatsapp.com/send?phone=918806092609&text=Hello! I'm interested in booking a stay."
         target="_blank"
         rel="noopener noreferrer"
         className="group relative"
@@ -20,7 +20,7 @@ const FloatingContact = () => {
 
       {/* Phone */}
       <a
-        href="tel:+918669505727"
+        href="tel:+918806092609"
         className="group relative"
       >
         <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-gold-light flex items-center justify-center shadow-gold hover:shadow-gold-lg transition-all hover:scale-110 animate-pulse-glow">

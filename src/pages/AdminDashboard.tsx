@@ -221,13 +221,13 @@ const AdminDashboard = () => {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-gold-dark flex items-center justify-center shadow-gold">
               <LayoutDashboard className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="font-display text-xl font-semibold text-foreground">LoonCamp Admin</h1>
+            <h1 className="font-display text-xl font-semibold text-foreground">PawnaHavenCamp Admin</h1>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => window.open('tel:+918669505727')}>
+            <Button variant="ghost" size="icon" onClick={() => window.open('tel:+918806092609')}>
               <Phone className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => window.open('https://wa.me/918669505727')}>
+            <Button variant="ghost" size="icon" onClick={() => window.open('https://wa.me/918806092609')}>
               <MessageSquare className="w-5 h-5" />
             </Button>
             <Button variant="outline" size="sm" onClick={handleLogout} className="rounded-xl">
