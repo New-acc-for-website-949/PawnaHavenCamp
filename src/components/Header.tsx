@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import logoImage from "@/assets/logo.png";
+import logoImage from "/assets/logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,28 +43,30 @@ const Header = () => {
           {/* Premium Logo */}
           <Link to="/" className="flex items-center gap-4 group">
             {/* 3D Circle Logo */}
-            <div className="relative">
+            <div className="relative group perspective-1000">
               <div 
-                className="w-14 h-14 rounded-full flex items-center justify-center overflow-hidden"
+                className="w-14 h-14 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:rotate-y-12 group-hover:scale-110"
                 style={{
                   background: 'linear-gradient(145deg, #1a1a1a, #0d0d0d)',
                   boxShadow: `
                     0 0 0 2px rgba(212, 175, 55, 0.8),
                     0 0 0 4px rgba(0, 0, 0, 0.5),
-                    0 4px 15px rgba(0, 0, 0, 0.6),
-                    0 0 30px rgba(212, 175, 55, 0.15),
+                    0 10px 20px rgba(0, 0, 0, 0.6),
+                    0 0 40px rgba(212, 175, 55, 0.2),
                     inset 0 2px 4px rgba(255, 255, 255, 0.1)
                   `,
+                  transformStyle: 'preserve-3d',
                 }}
               >
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-shimmer-3d pointer-events-none"></div>
                 <img 
                   src={logoImage} 
                   alt="Pawna Haven Camp" 
-                  className="w-12 h-12 object-contain"
+                  className="w-12 h-12 object-contain drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]"
                 />
               </div>
               {/* Glow effect */}
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500/20 via-yellow-400/10 to-amber-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-500/30 via-yellow-400/20 to-amber-500/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-pulse"></div>
             </div>
             
             {/* 3D Premium Text */}

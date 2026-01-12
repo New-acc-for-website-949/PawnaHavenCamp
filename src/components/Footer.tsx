@@ -17,9 +17,20 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-gold-light flex items-center justify-center">
-                <span className="text-primary-foreground font-display text-xl font-bold">P</span>
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
+              <div 
+                className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-110 shadow-lg"
+                style={{
+                  background: 'linear-gradient(145deg, #1a1a1a, #0d0d0d)',
+                  border: '2px solid rgba(212, 175, 55, 0.8)',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.1)',
+                }}
+              >
+                <img 
+                  src="/assets/logo.png" 
+                  alt="Pawna Haven Camp" 
+                  className="w-10 h-10 object-contain"
+                />
               </div>
               <span className="font-display text-2xl font-bold text-foreground">PawnaHavenCamp</span>
             </Link>

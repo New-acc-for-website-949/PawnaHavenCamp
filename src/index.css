@@ -180,6 +180,19 @@
 }
 
 @layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .rotate-y-12 {
+    transform: rotateY(12deg);
+  }
+  @keyframes shimmer-3d {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+  }
+  .animate-shimmer-3d {
+    animation: shimmer-3d 3s infinite linear;
+  }
   /* Animations */
   @keyframes fade-up {
     from {
