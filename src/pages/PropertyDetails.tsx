@@ -45,6 +45,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
 // Helper for mapping icons
 const getIcon = (amenity: string) => {
