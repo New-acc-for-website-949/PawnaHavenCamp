@@ -22,13 +22,14 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
       console.log('App is already installed/running in standalone mode');
-      setIsVisible(false);
-      return;
+      // setIsVisible(false);
+      // return;
     }
 
     window.addEventListener('beforeinstallprompt', handler);
 
-    if (window.location.search.includes('force-pwa')) {
+    // For debugging: Force visibility if requested
+    if (window.location.search.includes('force-pwa') || true) {
       setIsVisible(true);
     }
 
@@ -67,10 +68,10 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
       <Button 
         onClick={handleInstallClick}
         variant="ghost"
-        className={cn("w-full justify-start gap-3 h-12 px-4 rounded-xl font-bold text-primary hover:bg-primary/10 transition-all", className)}
+        className={cn("w-full justify-start gap-3 h-12 px-4 rounded-xl font-bold text-primary hover:bg-primary/10 transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] border border-primary/20", className)}
       >
-        <Download className="w-5 h-5" />
-        <span>Install App</span>
+        <Download className="w-5 h-5 text-primary animate-bounce" />
+        <span className="bg-gradient-to-r from-primary to-gold-light bg-clip-text text-transparent">Install App</span>
       </Button>
     );
   }
@@ -79,12 +80,12 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
     <Button 
       onClick={handleInstallClick}
       className={cn(
-        "fixed bottom-6 right-6 z-[9999] rounded-full shadow-2xl bg-primary hover:bg-primary/90 flex items-center gap-2 px-6 py-7 border-2 border-white/20 animate-bounce md:flex lg:flex",
+        "fixed bottom-6 right-6 z-[9999] rounded-full shadow-[0_0_30px_rgba(212,175,55,0.5)] bg-gradient-to-r from-primary to-gold-light hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-2 px-6 py-8 border-2 border-white/40 animate-pulse md:flex lg:flex",
         className
       )}
     >
-      <Download className="w-6 h-6" />
-      <span className="font-bold">Install App</span>
+      <Download className="w-8 h-8 text-white animate-bounce" />
+      <span className="font-bold text-white text-lg">Install App</span>
     </Button>
   );
 }
