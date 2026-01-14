@@ -11,10 +11,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import DemoPayment from "./pages/DemoPayment";
 import TicketPage from "./pages/TicketPage";
-import TermsConditions from "./pages/TermsConditions";
-import Services from "./pages/Services";
-import RefundPolicy from "./pages/RefundPolicy";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import InformationPage from "./pages/InformationPage";
 import NotFound from "./pages/NotFound";
 import ScrollRestoration from "./components/ScrollRestoration";
 
@@ -36,10 +33,7 @@ const App = () => (
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/payment/demo" element={<DemoPayment />} />
             <Route path="/ticket/:ticketId" element={<TicketPage />} />
-            <Route path="/terms" element={<TermsConditions />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/info/:type" element={<InformationPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

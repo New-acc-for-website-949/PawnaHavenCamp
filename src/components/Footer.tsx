@@ -88,7 +88,7 @@ const Footer = () => {
                 About Us
               </Link>
               <Link
-                to="/services"
+                to="/info/services"
                 className="text-muted-foreground hover:text-primary text-sm transition-colors"
               >
                 Our Services
