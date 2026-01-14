@@ -22,6 +22,8 @@ export function BookingForm({ propertyName, propertyId, pricePerPerson, onClose 
     name: "",
     mobile: "",
     persons: 1,
+    vegPersons: 1,
+    nonVegPersons: 0,
     checkIn: undefined as Date | undefined,
     checkOut: undefined as Date | undefined,
   });
@@ -33,14 +35,23 @@ export function BookingForm({ propertyName, propertyId, pricePerPerson, onClose 
   const [advanceAmount, setAdvanceAmount] = useState(0);
 
   useEffect(() => {
-    const total = formData.persons * pricePerPerson;
+    const totalPersons = (formData.vegPersons || 0) + (formData.nonVegPersons || 0);
+    const total = totalPersons * pricePerPerson;
     setTotalPrice(total);
     setAdvanceAmount(Math.round(total * 0.3)); // 30% advance
-  }, [formData.persons, pricePerPerson]);
+    
+    // Update main persons count to match total of food preferences
+    setFormData(prev => ({ ...prev, persons: totalPersons }));
+  }, [formData.vegPersons, formData.nonVegPersons, pricePerPerson]);
 
   const handleBook = () => {
     if (!formData.name || !formData.mobile || !formData.checkIn || !formData.checkOut) {
       alert("Please fill all details");
+      return;
+    }
+
+    if ((formData.vegPersons || 0) + (formData.nonVegPersons || 0) === 0) {
+      alert("Please enter number of persons");
       return;
     }
 
@@ -146,31 +157,47 @@ export function BookingForm({ propertyName, propertyId, pricePerPerson, onClose 
             </Popover>
           </div>
         </div>
-        <div className="grid gap-2">
-          <Label htmlFor="persons">Number of Persons</Label>
-          <div className="flex items-center gap-4">
+        
+        <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="vegPersons">Veg Persons</Label>
             <Input 
-              id="persons" 
+              id="vegPersons" 
               type="text" 
               inputMode="numeric"
               pattern="[0-9]*"
-              value={formData.persons || ""}
-              onFocus={(e) => {
-                // Scroll the element into view with offset for keyboard
-                setTimeout(() => {
-                  e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
-              }}
+              value={formData.vegPersons === 0 ? "" : formData.vegPersons}
               onChange={(e) => {
                 const val = e.target.value;
                 if (val === "" || /^[0-9]+$/.test(val)) {
-                  setFormData({ ...formData, persons: val === "" ? 0 : parseInt(val) });
+                  setFormData({ ...formData, vegPersons: val === "" ? 0 : parseInt(val) });
                 }
               }}
-              className="w-24"
             />
-            <span className="text-sm text-muted-foreground">× ₹{pricePerPerson} per person</span>
           </div>
+          <div className="grid gap-2">
+            <Label htmlFor="nonVegPersons">Non-Veg Persons</Label>
+            <Input 
+              id="nonVegPersons" 
+              type="text" 
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={formData.nonVegPersons === 0 ? "" : formData.nonVegPersons}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === "" || /^[0-9]+$/.test(val)) {
+                  setFormData({ ...formData, nonVegPersons: val === "" ? 0 : parseInt(val) });
+                }
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="bg-primary/5 p-3 rounded-xl border border-primary/10">
+          <p className="text-xs text-primary font-medium flex items-center gap-2">
+            <Users className="w-3.5 h-3.5" />
+            Note: Children below 5 years stay for free!
+          </p>
         </div>
       </div>
 
