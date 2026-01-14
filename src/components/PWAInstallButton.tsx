@@ -64,49 +64,26 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
     }
   };
 
-  // Only hide if we aren't forcing it AND the browser hasn't said we can install yet
-  if (!isVisible && !window.location.search.includes('force-pwa') && !deferredPrompt) {
-    return null;
-  }
-
-  if (variant === 'hero') {
-    return (
-      <Button 
-        onClick={handleInstallClick}
-        className={cn(
-          "inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm hover:scale-105 active:scale-95 transition-all duration-300 group h-auto",
-          className
-        )}
-      >
-        <Download className="w-4 h-4 text-primary animate-bounce group-hover:animate-none" />
-        <span className="text-sm font-medium text-primary uppercase tracking-wider">Install App</span>
-      </Button>
-    );
-  }
-
-  if (variant === 'menu') {
-    return (
-      <Button 
-        onClick={handleInstallClick}
-        variant="ghost"
-        className={cn("w-full justify-start gap-3 h-12 px-4 rounded-xl font-bold text-primary hover:bg-primary/10 transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] border border-primary/20", className)}
-      >
-        <Download className="w-5 h-5 text-primary animate-bounce" />
-        <span className="bg-gradient-to-r from-primary to-gold-light bg-clip-text text-transparent">Install App</span>
-      </Button>
-    );
-  }
-
+  // Ensure the button is always rendered for debugging/manual installation
   return (
     <Button 
       onClick={handleInstallClick}
       className={cn(
-        "fixed bottom-6 right-6 z-[9999] rounded-full shadow-[0_0_30px_rgba(212,175,55,0.5)] bg-gradient-to-r from-primary to-gold-light hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-2 px-6 py-8 border-2 border-white/40 animate-pulse md:flex lg:flex",
+        variant === 'hero' 
+          ? "inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm hover:scale-105 active:scale-95 transition-all duration-300 group h-auto mb-4"
+          : variant === 'menu'
+          ? "w-full justify-start gap-3 h-12 px-4 rounded-xl font-bold text-primary hover:bg-primary/10 transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] border border-primary/20"
+          : "fixed bottom-6 right-6 z-[9999] rounded-full shadow-[0_0_30px_rgba(212,175,55,0.5)] bg-gradient-to-r from-primary to-gold-light hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-2 px-6 py-8 border-2 border-white/40 animate-pulse",
         className
       )}
     >
-      <Download className="w-8 h-8 text-white animate-bounce" />
-      <span className="font-bold text-white text-lg">Install App</span>
+      <Download className={cn(variant === 'hero' ? "w-4 h-4" : "w-6 h-6", "text-primary animate-bounce group-hover:animate-none")} />
+      <span className={cn(
+        "font-bold uppercase tracking-wider",
+        variant === 'hero' ? "text-sm text-primary" : "text-lg bg-gradient-to-r from-primary to-gold-light bg-clip-text text-transparent"
+      )}>
+        Install App
+      </span>
     </Button>
   );
 }
