@@ -175,28 +175,55 @@ const PropertyDetails = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-0 pb-4">
-                  <div className="flex justify-center w-full overflow-hidden">
-                    <Calendar
-                      mode="single"
-                      className="rounded-md border shadow-sm bg-background pointer-events-none w-full max-w-full sm:max-w-md md:max-w-lg"
-                      classNames={{
-                        months: "w-full",
-                        month: "w-full space-y-4",
-                        table: "w-full border-collapse space-y-1",
-                        head_row: "flex w-full justify-between",
-                        row: "flex w-full mt-2 justify-between",
-                        cell: "h-9 w-9 md:h-12 md:w-12 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
-                        day: cn(buttonVariants({ variant: "ghost" }), "h-9 w-9 md:h-12 md:w-12 p-0 font-normal aria-selected:opacity-100"),
-                      }}
-                      disabled={(date) => {
-                        const day = date.getDate();
-                        return day === 15 || day === 16 || day === 20 || date < new Date();
-                      }}
-                    />
+                  <div className="flex justify-center w-full px-2">
+                    <div className="w-full max-w-[350px] sm:max-w-md md:max-w-lg bg-background rounded-2xl border shadow-sm p-2">
+                      <Calendar
+                        mode="single"
+                        className="w-full"
+                        classNames={{
+                          months: "w-full flex flex-col space-y-4",
+                          month: "w-full space-y-4",
+                          caption: "flex justify-center pt-1 relative items-center mb-2",
+                          caption_label: "text-sm font-semibold",
+                          nav: "space-x-1 flex items-center",
+                          nav_button: cn(
+                            buttonVariants({ variant: "outline" }),
+                            "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+                          ),
+                          nav_button_previous: "absolute left-1",
+                          nav_button_next: "absolute right-1",
+                          table: "w-full border-collapse",
+                          head_row: "flex w-full justify-between mb-1",
+                          head_cell: "text-muted-foreground rounded-md w-8 sm:w-10 md:w-12 font-normal text-[0.75rem] uppercase",
+                          row: "flex w-full mt-2 justify-between",
+                          cell: "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent",
+                          day: cn(
+                            buttonVariants({ variant: "ghost" }),
+                            "h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 p-0 font-normal aria-selected:opacity-100 hover:bg-primary/10 transition-colors"
+                          ),
+                          day_today: "bg-accent text-accent-foreground",
+                          day_outside: "text-muted-foreground opacity-50",
+                          day_disabled: "text-destructive opacity-100 line-through font-bold cursor-not-allowed bg-destructive/5",
+                          day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
+                          day_hidden: "invisible",
+                        }}
+                        disabled={(date) => {
+                          const day = date.getDate();
+                          return day === 15 || day === 16 || day === 20 || date < new Date();
+                        }}
+                      />
+                    </div>
                   </div>
-                  <p className="text-[10px] text-muted-foreground mt-2 text-center italic">
-                    * Red dates are already booked
-                  </p>
+                  <div className="flex items-center justify-center gap-4 mt-4 text-[10px] font-bold uppercase tracking-widest">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-destructive/20 border border-destructive/30" />
+                      <span className="text-destructive">Booked</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-background border border-border" />
+                      <span className="text-muted-foreground">Available</span>
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
