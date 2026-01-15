@@ -22,10 +22,27 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "icons/*.png"],
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "icons/*.png", "offline.html"],
       devOptions: {
         enabled: true,
         type: 'module',
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'NetworkOnly',
+            options: {
+              plugins: [{
+                handlerDidError: async () => {
+                  // Fallback for offline navigation
+                  return (self as any).caches.match('offline.html');
+                },
+              }],
+            },
+          },
+        ],
       },
       manifest: {
         name: "Pawna Haven Camp",
