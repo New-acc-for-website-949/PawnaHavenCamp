@@ -534,20 +534,17 @@ const AdminPropertyForm = ({ property, onSuccess, onCancel }: AdminPropertyFormP
               </div>
             </div>
             <div className="space-y-3">
-              {formData.images.map((image, index) => (
+              {formData.images.filter(img => img.trim()).map((image, index) => (
                 <div key={index} className="flex items-center gap-3 group">
                   <div className="flex-1 relative">
                     <Input
                       value={image}
-                      onChange={(e) => handleArrayChange('images', index, e.target.value)}
-                      placeholder="https://example.com/image.jpg"
-                      className="h-12 bg-secondary/50 rounded-xl pr-12"
+                      readOnly
+                      className="h-12 bg-secondary/30 rounded-xl pr-12 text-muted-foreground"
                     />
-                    {image && (
-                      <div className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg overflow-hidden bg-secondary">
-                        <img src={image} alt="" className="w-full h-full object-cover" onError={(e) => e.currentTarget.style.display = 'none'} />
-                      </div>
-                    )}
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg overflow-hidden bg-secondary">
+                      <img src={image} alt="" className="w-full h-full object-cover" onError={(e) => e.currentTarget.style.display = 'none'} />
+                    </div>
                   </div>
                   <Button
                     type="button"
@@ -560,15 +557,12 @@ const AdminPropertyForm = ({ property, onSuccess, onCancel }: AdminPropertyFormP
                   </Button>
                 </div>
               ))}
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => addArrayItem('images')}
-                className="w-full h-12 rounded-xl border-dashed hover:border-primary hover:bg-primary/5 transition-all"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Image URL
-              </Button>
+              {formData.images.filter(img => img.trim()).length === 0 && (
+                <div className="text-center py-8 border-2 border-dashed border-border/50 rounded-2xl bg-secondary/10">
+                  <ImageIcon className="w-8 h-8 text-muted-foreground mx-auto mb-2 opacity-20" />
+                  <p className="text-sm text-muted-foreground">No images uploaded yet</p>
+                </div>
+              )}
             </div>
           </div>
 
