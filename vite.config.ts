@@ -28,14 +28,14 @@ export default defineConfig(({ mode }) => ({
         type: 'module',
       },
       manifest: {
-        name: "PawnaHavenCamp",
+        name: "Pawna Haven Camp",
         short_name: "PawnaHaven",
         description: "Luxury resort and camping booking platform",
         display: "standalone",
         orientation: "portrait",
         start_url: "/",
-        theme_color: "#1e3a8a",
-        background_color: "#1e3a8a",
+        theme_color: "#000000",
+        background_color: "#000000",
         icons: [
           {
             src: "icons/icon-192x192.png",
