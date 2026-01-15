@@ -31,6 +31,7 @@ import AdminFloatingActions from '@/components/AdminFloatingActions';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const AdminDashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +42,7 @@ const AdminDashboard = () => {
   const [editingProperty, setEditingProperty] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [selectedProperty, setSelectedProperty] = useState<any>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -299,63 +301,102 @@ const AdminDashboard = () => {
             </TabsList>
           </Tabs>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
             {filteredProperties.map((property) => (
-              <div key={property.id} className="group glass rounded-2xl border border-border/30 p-4 hover:border-primary/30 transition-all">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="w-full sm:w-32 h-24 rounded-xl overflow-hidden bg-secondary flex-shrink-0">
-                    {property.images?.[0] ? (
-                      <img src={property.images[0].image_url || property.images[0]} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center"><Building2 className="w-8 h-8 text-muted-foreground" /></div>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <h4 className="font-semibold text-foreground truncate text-lg">{property.title}</h4>
-                      <div className="flex items-center gap-1">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-primary" onClick={() => window.open(`/property/${property.slug}`)}><Eye className="w-4 h-4" /></Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-primary" onClick={() => { setEditingProperty(property); setShowPropertyForm(true); }}><Edit3 className="w-4 h-4" /></Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => handleDeleteProperty(property.id)}><Trash2 className="w-4 h-4" /></Button>
+              <Dialog key={property.id}>
+                <DialogTrigger asChild>
+                  <div className="group glass rounded-2xl border border-border/30 p-3 hover:border-primary/30 transition-all cursor-pointer">
+                    <div className="flex flex-col md:flex-row gap-3">
+                      <div className="w-full md:w-32 h-24 rounded-xl overflow-hidden bg-secondary flex-shrink-0">
+                        {property.images?.[0] ? (
+                          <img src={property.images[0].image_url || property.images[0]} alt="" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center"><Building2 className="w-8 h-8 text-muted-foreground" /></div>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-foreground truncate text-sm md:text-lg mb-1">{property.title}</h4>
+                        <div className="flex items-center gap-1 text-[10px] md:text-sm text-muted-foreground">
+                          <MapPin className="w-2.5 h-2.5" />
+                          <span className="truncate">{property.location}</span>
+                        </div>
+                        <div className="mt-2 flex items-center justify-between">
+                          <span className="font-bold text-primary text-xs md:text-base">₹{property.price}</span>
+                          <Badge variant="outline" className="text-[8px] h-5 capitalize">{property.category}</Badge>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground mb-3">
-                      <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {property.location}</span>
-                      <span className="flex items-center gap-1"><Star className="w-3 h-3 text-yellow-500 fill-yellow-500" /> {property.rating}</span>
-                      <span className="font-semibold text-foreground">₹{property.price}</span>
-                      <span className="flex items-center gap-1 text-[10px]"><Clock className="w-3 h-3" /> {property.check_in_time} - {property.check_out_time}</span>
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl w-[95vw] rounded-2xl max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl md:text-2xl font-display">{property.title}</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-6 pt-4">
+                    {/* Image Gallery */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {property.images?.map((img: any, idx: number) => (
+                        <div key={idx} className="aspect-video rounded-xl overflow-hidden bg-secondary">
+                          <img src={img.image_url || img} alt="" className="w-full h-full object-cover" />
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className={`h-7 rounded-lg text-[10px] ${property.is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-destructive/10 text-destructive'}`}
-                        onClick={() => handleToggleStatus(property.id, 'is_active', property.is_active)}
-                      >
-                        {property.is_active ? <CheckCircle2 className="w-3 h-3 mr-1" /> : <XCircle className="w-3 h-3 mr-1" />}
-                        {property.is_active ? 'Active' : 'Inactive'}
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className={`h-7 rounded-lg text-[10px] ${property.is_available ? 'bg-blue-500/10 text-blue-400' : 'bg-orange-500/10 text-orange-400'}`}
-                        onClick={() => handleToggleStatus(property.id, 'is_available', property.is_available)}
-                      >
-                        {property.is_available ? 'Available' : 'Booked'}
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className={`h-7 rounded-lg text-[10px] ${property.is_top_selling ? 'bg-yellow-500/10 text-yellow-400' : 'bg-secondary text-muted-foreground'}`}
-                        onClick={() => handleToggleStatus(property.id, 'is_top_selling', property.is_top_selling)}
-                      >
-                        Top Selling
-                      </Button>
-                      <Button variant="ghost" className="h-7 px-2 rounded-lg text-[10px] bg-secondary/50" onClick={() => window.open(`tel:${property.owner_mobile}`)}><Phone className="w-3 h-3 mr-1" /> Call Owner</Button>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {property.location}</span>
+                          <span className="flex items-center gap-1"><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /> {property.rating}</span>
+                          <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {property.check_in_time} - {property.check_out_time}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground line-clamp-3">{property.description}</p>
+                        <div className="text-2xl font-bold text-foreground">₹{property.price} <span className="text-sm font-normal text-muted-foreground">{property.price_note}</span></div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h5 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">Quick Actions</h5>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button 
+                            variant="outline" 
+                            className={`h-10 rounded-xl text-xs ${property.is_active ? 'border-emerald-500/50 text-emerald-500' : 'border-destructive/50 text-destructive'}`}
+                            onClick={(e) => { e.stopPropagation(); handleToggleStatus(property.id, 'is_active', property.is_active); }}
+                          >
+                            {property.is_active ? 'Active' : 'Inactive'}
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            className={`h-10 rounded-xl text-xs ${property.is_available ? 'border-blue-500/50 text-blue-500' : 'border-orange-500/50 text-orange-500'}`}
+                            onClick={(e) => { e.stopPropagation(); handleToggleStatus(property.id, 'is_available', property.is_available); }}
+                          >
+                            {property.is_available ? 'Available' : 'Booked'}
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            className={`h-10 rounded-xl text-xs ${property.is_top_selling ? 'border-yellow-500 text-yellow-500 bg-yellow-500/10' : ''}`}
+                            onClick={(e) => { e.stopPropagation(); handleToggleStatus(property.id, 'is_top_selling', property.is_top_selling); }}
+                          >
+                            Top Selling
+                          </Button>
+                          <Button variant="outline" className="h-10 rounded-xl text-xs" onClick={() => window.open(`tel:${property.owner_mobile}`)}>
+                            Call Owner
+                          </Button>
+                        </div>
+                        <div className="flex gap-2 pt-2 border-t border-border/50">
+                          <Button variant="outline" className="flex-1 rounded-xl h-10 gap-2" onClick={() => window.open(`/property/${property.slug}`)}>
+                            <Eye className="w-4 h-4" /> View Public
+                          </Button>
+                          <Button variant="outline" className="flex-1 rounded-xl h-10 gap-2 text-primary border-primary/30" onClick={() => { setEditingProperty(property); setShowPropertyForm(true); }}>
+                            <Edit3 className="w-4 h-4" /> Edit
+                          </Button>
+                          <Button variant="outline" className="rounded-xl h-10 w-10 p-0 text-destructive border-destructive/30" onClick={() => handleDeleteProperty(property.id)}>
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </DialogContent>
+              </Dialog>
             ))}
           </div>
         </div>
