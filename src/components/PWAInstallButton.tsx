@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Download, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface PWAInstallButtonProps {
   variant?: 'floating' | 'menu' | 'hero';
@@ -10,28 +11,32 @@ interface PWAInstallButtonProps {
 
 export function PWAInstallButton({ variant = 'floating', className }: PWAInstallButtonProps) {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
+    // Check if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone) {
+      setIsInstalled(true);
+      return;
+    }
+
+    // Check if iOS
+    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    setIsIOS(isIOSDevice);
+
     const handler = (e: any) => {
       console.log('beforeinstallprompt event fired');
       e.preventDefault();
       setDeferredPrompt(e);
-      setIsVisible(true);
     };
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      console.log('App is already installed/running in standalone mode');
-      setIsVisible(false);
-      return;
-    }
-
     window.addEventListener('beforeinstallprompt', handler);
-
-    // Initial check for visibility
-    if (window.location.search.includes('force-pwa')) {
-      setIsVisible(true);
-    }
+    window.addEventListener('appinstalled', () => {
+      setIsInstalled(true);
+      setDeferredPrompt(null);
+      toast.success("App installed successfully!");
+    });
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handler);
@@ -39,15 +44,24 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
   }, []);
 
   const handleInstallClick = async () => {
-    // Check if app is already installed/running in standalone mode
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      alert("App is already installed and running!");
+    if (isInstalled) {
+      toast.info("App is already installed!");
+      return;
+    }
+
+    if (isIOS) {
+      toast.info(
+        "To install: Tap the 'Share' button in Safari and select 'Add to Home Screen' 📲",
+        { duration: 6000 }
+      );
       return;
     }
 
     if (!deferredPrompt) {
-      // Manual trigger for Chrome/Edge if possible
-      console.log("No deferredPrompt, PWA might not be meet criteria yet");
+      toast.info(
+        "To install: Open your browser menu (⋮) and select 'Install app' or 'Add to Home screen'",
+        { duration: 5000 }
+      );
       return;
     }
 
@@ -58,15 +72,15 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
       
       if (outcome === 'accepted') {
         setDeferredPrompt(null);
-        setIsVisible(false);
       }
     } catch (error) {
       console.error('PWA install error:', error);
-      alert("Something went wrong during installation. Please try the manual method via your browser menu.");
+      toast.error("Installation failed. Please try via your browser menu.");
     }
   };
 
-  // Ensure the button is always rendered for debugging/manual installation
+  if (isInstalled && variant !== 'menu') return null;
+
   return (
     <Button 
       onClick={handleInstallClick}
@@ -79,15 +93,21 @@ export function PWAInstallButton({ variant = 'floating', className }: PWAInstall
         className
       )}
     >
-      <Download className={cn(
-        variant === 'hero' ? "w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" : "w-6 h-6 text-primary", 
-        "animate-bounce group-hover:animate-none"
-      )} />
+      {isIOS ? (
+        <Info className={cn(
+          variant === 'hero' ? "w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" : "w-6 h-6 text-primary"
+        )} />
+      ) : (
+        <Download className={cn(
+          variant === 'hero' ? "w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" : "w-6 h-6 text-primary", 
+          "animate-bounce group-hover:animate-none"
+        )} />
+      )}
       <span className={cn(
         "font-bold uppercase tracking-wider",
         variant === 'hero' ? "text-xs sm:text-base text-white" : "text-lg bg-gradient-to-r from-primary to-gold-light bg-clip-text text-transparent"
       )}>
-        Install App
+        {isInstalled ? "App Installed" : isIOS ? "How to Install" : "Install App"}
       </span>
     </Button>
   );
