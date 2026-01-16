@@ -6,7 +6,8 @@ import {
   Smartphone, 
   Fingerprint,
   ShieldCheck,
-  ArrowRight
+  ArrowRight,
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -18,11 +19,12 @@ const GenerateCodePage = () => {
   const [formData, setFormData] = useState({
     referralCode: "",
     mobile: "",
+    username: "",
   });
   const [loading, setLoading] = useState(false);
 
   const handleVerify = () => {
-    if (!formData.referralCode || !formData.mobile) {
+    if (!formData.referralCode || !formData.mobile || !formData.username) {
       alert("Please fill all fields");
       return;
     }
@@ -88,6 +90,20 @@ const GenerateCodePage = () => {
               className="h-14 bg-secondary/50 rounded-2xl border-border/50 focus:border-primary transition-all text-lg"
               value={formData.mobile}
               onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="username" className="text-sm font-bold flex items-center gap-2">
+              <User className="w-4 h-4 text-primary" />
+              Create Your User Name
+            </Label>
+            <Input
+              id="username"
+              placeholder="Enter username"
+              className="h-14 bg-secondary/50 rounded-2xl border-border/50 focus:border-primary transition-all text-lg"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
             />
           </div>
 
