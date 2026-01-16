@@ -34,43 +34,41 @@ const ReferralPage = () => {
       </Helmet>
 
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
+      <div className="sticky top-0 z-50 bg-black border-b border-border/50">
         <div className="container mx-auto px-6 py-4 flex items-center gap-4">
           <Link to="/" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all">
             <ChevronLeft className="w-6 h-6" />
           </Link>
           <h1 className="font-display text-xl font-bold">Referral Earning</h1>
         </div>
+        
+        {/* Fixed Row Options */}
+        <div className="px-6 pb-4 bg-black border-b border-border/30">
+          <div className="grid grid-cols-2 gap-3">
+            <Card className="p-3 bg-card border-border/50 hover:border-primary/50 transition-all cursor-pointer group rounded-2xl flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                <CircleCheck className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-bold text-xs truncate">Already code?</h3>
+                <p className="text-[10px] text-muted-foreground truncate">Check earning</p>
+              </div>
+            </Card>
+
+            <Card className="p-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer group rounded-2xl shadow-gold flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center text-white shrink-0">
+                <Zap className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-bold text-xs text-white truncate">New Code</h3>
+                <p className="text-[10px] text-primary-foreground/80 truncate">Generate</p>
+              </div>
+            </Card>
+          </div>
+        </div>
       </div>
 
-      <div className="container mx-auto px-6 pt-8 space-y-8">
-        {/* Main Options */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Card className="p-6 bg-card border-border/50 hover:border-primary/50 transition-all cursor-pointer group rounded-3xl">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <CircleCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg">Already have code?</h3>
-                <p className="text-sm text-muted-foreground">Check our earning</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer group rounded-3xl shadow-gold">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                <Zap className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-white">Generate Code</h3>
-                <p className="text-sm text-primary-foreground/80">Get your unique link</p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
+      <div className="container mx-auto px-6 pt-6 space-y-8">
         {/* Leaderboard Section */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
