@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, IndianRupee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { PWAInstallButton } from "./PWAInstallButton";
@@ -163,8 +163,11 @@ const Header = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href, link.isExternal)}
-                className="text-lg font-medium text-foreground/80 hover:text-primary text-left transition-colors"
+                className="text-lg font-medium text-foreground/80 hover:text-primary text-left transition-colors flex items-center gap-2"
               >
+                {link.name === "Referral Earning" && (
+                  <IndianRupee className="w-5 h-5 text-green-500" />
+                )}
                 {link.name}
               </button>
             ))}
