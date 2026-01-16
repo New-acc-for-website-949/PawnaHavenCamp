@@ -56,7 +56,7 @@ const GenerateCodePage = () => {
           <div className="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center text-primary mx-auto mb-6">
             <Fingerprint className="w-10 h-10" />
           </div>
-          <h2 className="text-3xl font-display font-bold mb-3">Verify Identity</h2>
+          <h2 className="text-3xl font-display font-bold mb-3">Create New Referral code</h2>
           <p className="text-muted-foreground">Enter your details to generate a new unique referral code</p>
         </div>
 
@@ -64,11 +64,11 @@ const GenerateCodePage = () => {
           <div className="space-y-2">
             <Label htmlFor="referralCode" className="text-sm font-bold flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-primary" />
-              Referral Code
+              Enter Referral code
             </Label>
             <Input
               id="referralCode"
-              placeholder="Enter your existing code"
+              placeholder="Create your referral code"
               className="h-14 bg-secondary/50 rounded-2xl border-border/50 focus:border-primary transition-all text-lg"
               value={formData.referralCode}
               onChange={(e) => setFormData({ ...formData, referralCode: e.target.value })}
@@ -78,7 +78,7 @@ const GenerateCodePage = () => {
           <div className="space-y-2">
             <Label htmlFor="mobile" className="text-sm font-bold flex items-center gap-2">
               <Smartphone className="w-4 h-4 text-primary" />
-              Mobile Number
+              Enter Mobile Number
             </Label>
             <Input
               id="mobile"
