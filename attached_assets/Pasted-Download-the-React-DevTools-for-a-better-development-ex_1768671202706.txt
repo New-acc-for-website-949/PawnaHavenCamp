@@ -1,0 +1,121 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+react-router-dom.js?v=dcf54711:4393 ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+warnOnce @ react-router-dom.js?v=dcf54711:4393
+logDeprecation @ react-router-dom.js?v=dcf54711:4396
+logV6DeprecationWarnings @ react-router-dom.js?v=dcf54711:4399
+(anonymous) @ react-router-dom.js?v=dcf54711:5271
+commitHookEffectListMount @ chunk-T2SWDQEL.js?v=dcf54711:16915
+commitPassiveMountOnFiber @ chunk-T2SWDQEL.js?v=dcf54711:18156
+commitPassiveMountEffects_complete @ chunk-T2SWDQEL.js?v=dcf54711:18129
+commitPassiveMountEffects_begin @ chunk-T2SWDQEL.js?v=dcf54711:18119
+commitPassiveMountEffects @ chunk-T2SWDQEL.js?v=dcf54711:18109
+flushPassiveEffectsImpl @ chunk-T2SWDQEL.js?v=dcf54711:19490
+flushPassiveEffects @ chunk-T2SWDQEL.js?v=dcf54711:19447
+performSyncWorkOnRoot @ chunk-T2SWDQEL.js?v=dcf54711:18868
+flushSyncCallbacks @ chunk-T2SWDQEL.js?v=dcf54711:9119
+commitRootImpl @ chunk-T2SWDQEL.js?v=dcf54711:19432
+commitRoot @ chunk-T2SWDQEL.js?v=dcf54711:19277
+finishConcurrentRender @ chunk-T2SWDQEL.js?v=dcf54711:18805
+performConcurrentWorkOnRoot @ chunk-T2SWDQEL.js?v=dcf54711:18718
+workLoop @ chunk-T2SWDQEL.js?v=dcf54711:197
+flushWork @ chunk-T2SWDQEL.js?v=dcf54711:176
+performWorkUntilDeadline @ chunk-T2SWDQEL.js?v=dcf54711:384Understand this warning
+react-router-dom.js?v=dcf54711:4393 ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+warnOnce @ react-router-dom.js?v=dcf54711:4393
+logDeprecation @ react-router-dom.js?v=dcf54711:4396
+logV6DeprecationWarnings @ react-router-dom.js?v=dcf54711:4402
+(anonymous) @ react-router-dom.js?v=dcf54711:5271
+commitHookEffectListMount @ chunk-T2SWDQEL.js?v=dcf54711:16915
+commitPassiveMountOnFiber @ chunk-T2SWDQEL.js?v=dcf54711:18156
+commitPassiveMountEffects_complete @ chunk-T2SWDQEL.js?v=dcf54711:18129
+commitPassiveMountEffects_begin @ chunk-T2SWDQEL.js?v=dcf54711:18119
+commitPassiveMountEffects @ chunk-T2SWDQEL.js?v=dcf54711:18109
+flushPassiveEffectsImpl @ chunk-T2SWDQEL.js?v=dcf54711:19490
+flushPassiveEffects @ chunk-T2SWDQEL.js?v=dcf54711:19447
+performSyncWorkOnRoot @ chunk-T2SWDQEL.js?v=dcf54711:18868
+flushSyncCallbacks @ chunk-T2SWDQEL.js?v=dcf54711:9119
+commitRootImpl @ chunk-T2SWDQEL.js?v=dcf54711:19432
+commitRoot @ chunk-T2SWDQEL.js?v=dcf54711:19277
+finishConcurrentRender @ chunk-T2SWDQEL.js?v=dcf54711:18805
+performConcurrentWorkOnRoot @ chunk-T2SWDQEL.js?v=dcf54711:18718
+workLoop @ chunk-T2SWDQEL.js?v=dcf54711:197
+flushWork @ chunk-T2SWDQEL.js?v=dcf54711:176
+performWorkUntilDeadline @ chunk-T2SWDQEL.js?v=dcf54711:384Understand this warning
+@radix-ui_react-dialog.js?v=dcf54711:339 Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+(anonymous) @ @radix-ui_react-dialog.js?v=dcf54711:339
+commitHookEffectListMount @ chunk-T2SWDQEL.js?v=dcf54711:16915
+commitPassiveMountOnFiber @ chunk-T2SWDQEL.js?v=dcf54711:18156
+commitPassiveMountEffects_complete @ chunk-T2SWDQEL.js?v=dcf54711:18129
+commitPassiveMountEffects_begin @ chunk-T2SWDQEL.js?v=dcf54711:18119
+commitPassiveMountEffects @ chunk-T2SWDQEL.js?v=dcf54711:18109
+flushPassiveEffectsImpl @ chunk-T2SWDQEL.js?v=dcf54711:19490
+flushPassiveEffects @ chunk-T2SWDQEL.js?v=dcf54711:19447
+commitRootImpl @ chunk-T2SWDQEL.js?v=dcf54711:19416
+commitRoot @ chunk-T2SWDQEL.js?v=dcf54711:19277
+performSyncWorkOnRoot @ chunk-T2SWDQEL.js?v=dcf54711:18895
+flushSyncCallbacks @ chunk-T2SWDQEL.js?v=dcf54711:9119
+(anonymous) @ chunk-T2SWDQEL.js?v=dcf54711:18627Understand this warning
+paytmPayment.ts:17  POST https://c0f35a6e-9c3a-4b85-9188-1794eaa214b0-00-2wbbnmvqgkhvg.riker.replit.dev/api/payments/paytm/initiate 404 (Not Found)
+initiatePayment @ paytmPayment.ts:17
+initiateAndRedirect @ paytmPayment.ts:81
+handleBook @ BookingForm.tsx:165
+await in handleBook
+callCallback2 @ chunk-T2SWDQEL.js?v=dcf54711:3674
+invokeGuardedCallbackDev @ chunk-T2SWDQEL.js?v=dcf54711:3699
+invokeGuardedCallback @ chunk-T2SWDQEL.js?v=dcf54711:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-T2SWDQEL.js?v=dcf54711:3736
+executeDispatch @ chunk-T2SWDQEL.js?v=dcf54711:7014
+processDispatchQueueItemsInOrder @ chunk-T2SWDQEL.js?v=dcf54711:7034
+processDispatchQueue @ chunk-T2SWDQEL.js?v=dcf54711:7043
+dispatchEventsForPlugins @ chunk-T2SWDQEL.js?v=dcf54711:7051
+(anonymous) @ chunk-T2SWDQEL.js?v=dcf54711:7174
+batchedUpdates$1 @ chunk-T2SWDQEL.js?v=dcf54711:18913
+batchedUpdates @ chunk-T2SWDQEL.js?v=dcf54711:3579
+dispatchEventForPluginEventSystem @ chunk-T2SWDQEL.js?v=dcf54711:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-T2SWDQEL.js?v=dcf54711:5478
+dispatchEvent @ chunk-T2SWDQEL.js?v=dcf54711:5472
+dispatchDiscreteEvent @ chunk-T2SWDQEL.js?v=dcf54711:5449Understand this error
+paytmPayment.ts:84 Payment initiation failed: Error: Failed to initiate payment
+    at PaytmPaymentService.initiatePayment (paytmPayment.ts:33:13)
+    at async PaytmPaymentService.initiateAndRedirect (paytmPayment.ts:81:24)
+    at async handleBook (BookingForm.tsx:165:7)
+initiateAndRedirect @ paytmPayment.ts:84
+await in initiateAndRedirect
+handleBook @ BookingForm.tsx:165
+await in handleBook
+callCallback2 @ chunk-T2SWDQEL.js?v=dcf54711:3674
+invokeGuardedCallbackDev @ chunk-T2SWDQEL.js?v=dcf54711:3699
+invokeGuardedCallback @ chunk-T2SWDQEL.js?v=dcf54711:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-T2SWDQEL.js?v=dcf54711:3736
+executeDispatch @ chunk-T2SWDQEL.js?v=dcf54711:7014
+processDispatchQueueItemsInOrder @ chunk-T2SWDQEL.js?v=dcf54711:7034
+processDispatchQueue @ chunk-T2SWDQEL.js?v=dcf54711:7043
+dispatchEventsForPlugins @ chunk-T2SWDQEL.js?v=dcf54711:7051
+(anonymous) @ chunk-T2SWDQEL.js?v=dcf54711:7174
+batchedUpdates$1 @ chunk-T2SWDQEL.js?v=dcf54711:18913
+batchedUpdates @ chunk-T2SWDQEL.js?v=dcf54711:3579
+dispatchEventForPluginEventSystem @ chunk-T2SWDQEL.js?v=dcf54711:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-T2SWDQEL.js?v=dcf54711:5478
+dispatchEvent @ chunk-T2SWDQEL.js?v=dcf54711:5472
+dispatchDiscreteEvent @ chunk-T2SWDQEL.js?v=dcf54711:5449Understand this error
+BookingForm.tsx:167 Booking error: Error: Failed to initiate payment
+    at PaytmPaymentService.initiatePayment (paytmPayment.ts:33:13)
+    at async PaytmPaymentService.initiateAndRedirect (paytmPayment.ts:81:24)
+    at async handleBook (BookingForm.tsx:165:7)
+handleBook @ BookingForm.tsx:167
+await in handleBook
+callCallback2 @ chunk-T2SWDQEL.js?v=dcf54711:3674
+invokeGuardedCallbackDev @ chunk-T2SWDQEL.js?v=dcf54711:3699
+invokeGuardedCallback @ chunk-T2SWDQEL.js?v=dcf54711:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-T2SWDQEL.js?v=dcf54711:3736
+executeDispatch @ chunk-T2SWDQEL.js?v=dcf54711:7014
+processDispatchQueueItemsInOrder @ chunk-T2SWDQEL.js?v=dcf54711:7034
+processDispatchQueue @ chunk-T2SWDQEL.js?v=dcf54711:7043
+dispatchEventsForPlugins @ chunk-T2SWDQEL.js?v=dcf54711:7051
+(anonymous) @ chunk-T2SWDQEL.js?v=dcf54711:7174
+batchedUpdates$1 @ chunk-T2SWDQEL.js?v=dcf54711:18913
+batchedUpdates @ chunk-T2SWDQEL.js?v=dcf54711:3579
+dispatchEventForPluginEventSystem @ chunk-T2SWDQEL.js?v=dcf54711:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-T2SWDQEL.js?v=dcf54711:5478
+dispatchEvent @ chunk-T2SWDQEL.js?v=dcf54711:5472
+dispatchDiscreteEvent @ chunk-T2SWDQEL.js?v=dcf54711:5449Understand this error

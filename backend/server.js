@@ -57,6 +57,7 @@ app.use(express.static(frontendPath));
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes);
 app.use('/api/etickets', eticketRoutes);
 
 // Health check endpoint
