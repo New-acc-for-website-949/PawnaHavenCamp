@@ -52,7 +52,9 @@ const initiatePaytmPayment = async (req, res) => {
     const website = process.env.PAYTM_WEBSITE || 'WEBSTAGING';
     const industryType = process.env.PAYTM_INDUSTRY_TYPE || 'Retail';
     const merchantKey = process.env.PAYTM_MERCHANT_KEY || 'j@D7fI3pAMAl7nQC';
-    const callbackUrl = process.env.PAYTM_CALLBACK_URL || `${req.protocol}://${req.get('host')}/api/payments/paytm/callback`;
+    const host = req.get('x-forwarded-host') || req.get('host');
+    const protocol = req.get('x-forwarded-proto') || req.protocol;
+    const callbackUrl = process.env.PAYTM_CALLBACK_URL || `${protocol}://${host}/api/payments/paytm/callback`;
     const gatewayUrl = process.env.PAYTM_GATEWAY_URL || 'https://securegw-stage.paytm.in/order/process';
 
     if (!mid || !website || !industryType || !merchantKey) {
