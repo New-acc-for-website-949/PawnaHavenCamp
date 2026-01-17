@@ -61,28 +61,20 @@ const OptimizedImage = ({
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
-      {!isLoaded && isInView && (
-        <img
-          src={blurSrc}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover blur-xl scale-110"
-          aria-hidden="true"
-        />
-      )}
       {isInView && (
         <img
           src={optimizedSrc}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
-          className={`w-full h-full object-cover transition-opacity duration-500 ${
+          className={`w-full h-full object-cover transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={handleImageLoad}
         />
       )}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-muted/20 animate-pulse" />
+        <div className="absolute inset-0 bg-muted/10" />
       )}
     </div>
   );

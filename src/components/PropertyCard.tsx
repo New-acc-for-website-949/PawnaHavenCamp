@@ -145,7 +145,7 @@ const PropertyCard = ({
             }`}
           >
             <div className="flex items-center gap-1.5">
-              <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${isAvailable ? "bg-green-500" : "bg-orange-500"}`} />
+              <div className={`w-1.5 h-1.5 rounded-full ${isAvailable ? "bg-green-500" : "bg-orange-500"}`} />
               <span>
                 {isAvailable ? "Available" : "Booked"}
               </span>
