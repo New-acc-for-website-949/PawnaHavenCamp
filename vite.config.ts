@@ -22,16 +22,19 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: 'auto',
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "icons/*.png", "offline.html"],
       devOptions: {
         enabled: true,
         type: 'module',
+        navigateFallback: 'index.html',
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
+        navigateFallback: 'index.html',
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.mode === 'navigate',
