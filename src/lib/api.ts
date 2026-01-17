@@ -1,5 +1,26 @@
 import { supabase } from './supabase';
 
+const parseJsonField = (field: any) => {
+  if (typeof field === 'string') {
+    try {
+      return JSON.parse(field);
+    } catch {
+      return [];
+    }
+  }
+  return Array.isArray(field) ? field : [];
+};
+
+const transformProperty = (property: any) => {
+  return {
+    ...property,
+    amenities: parseJsonField(property.amenities),
+    activities: parseJsonField(property.activities),
+    highlights: parseJsonField(property.highlights),
+    policies: parseJsonField(property.policies),
+  };
+};
+
 export const propertyAPI = {
   getPublicList: async () => {
     try {
@@ -18,9 +39,11 @@ export const propertyAPI = {
 
       if (error) throw error;
 
+      const transformedProperties = (properties || []).map(transformProperty);
+
       return {
         success: true,
-        data: properties || []
+        data: transformedProperties
       };
     } catch (error) {
       console.error('Error fetching properties:', error);
@@ -48,9 +71,11 @@ export const propertyAPI = {
 
       if (error) throw error;
 
+      const transformedProperty = property ? transformProperty(property) : null;
+
       return {
         success: true,
-        data: property
+        data: transformedProperty
       };
     } catch (error) {
       console.error('Error fetching property:', error);
