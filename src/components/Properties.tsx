@@ -41,16 +41,7 @@ const Properties = () => {
       try {
         const response = await propertyAPI.getPublicList();
         if (response.success) {
-          const mappedProperties = response.data.map((p: any) => ({
-            ...p,
-            priceNote: p.price_note,
-            isAvailable: p.is_available,
-            isTopSelling: p.is_top_selling,
-            propertyCategory: p.property_category || "affordable",
-            image: p.images && p.images.length > 0 ? p.images[0].image_url : "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80",
-            images: p.images && p.images.length > 0 ? p.images.map((img: any) => img.image_url) : ["https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80"]
-          }));
-          setProperties(mappedProperties);
+          setProperties(response.data);
         }
       } catch (error) {
         console.error("Failed to fetch properties:", error);
