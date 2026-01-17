@@ -22,6 +22,10 @@ interface BookingRequest {
   max_capacity?: number;
   veg_guest_count?: number;
   nonveg_guest_count?: number;
+  owner_name?: string;
+  map_link?: string;
+  property_address?: string;
+  total_amount?: number;
 }
 
 function validateBookingRequest(req: BookingRequest): { valid: boolean; error?: string } {
@@ -129,6 +133,19 @@ Deno.serve(async (req: Request) => {
       payment_status: "INITIATED",
       booking_status: "PAYMENT_PENDING",
     };
+
+    if (bookingRequest.owner_name) {
+      bookingData.owner_name = bookingRequest.owner_name;
+    }
+    if (bookingRequest.map_link) {
+      bookingData.map_link = bookingRequest.map_link;
+    }
+    if (bookingRequest.property_address) {
+      bookingData.property_address = bookingRequest.property_address;
+    }
+    if (bookingRequest.total_amount) {
+      bookingData.total_amount = bookingRequest.total_amount;
+    }
 
     if (bookingRequest.property_type === "VILLA") {
       bookingData.persons = bookingRequest.persons;

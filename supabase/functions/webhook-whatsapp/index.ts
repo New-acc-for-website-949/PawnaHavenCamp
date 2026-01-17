@@ -125,30 +125,50 @@ Deno.serve(async (req: Request) => {
           `✅ Booking confirmed!\n\nBooking ID: ${bookingId}\nGuest: ${booking.guest_name}\nProperty: ${booking.property_name}`
         );
 
-        await whatsappService.sendTextMessage(
-          booking.guest_phone,
-          `🎉 Great news! Your booking has been confirmed by the owner.\n\nYou will receive your e-ticket shortly.`
-        );
+        try {
+          const processUrl = `${supabaseUrl}/functions/v1/booking-process-confirmed`;
+          const processResponse = await fetch(processUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${supabaseServiceKey}`,
+            },
+            body: JSON.stringify({ booking_id: bookingId }),
+          });
 
-        await whatsappService.sendTextMessage(
-          booking.admin_phone,
-          `✅ Booking Confirmed\n\nBooking ID: ${bookingId}\nProperty: ${booking.property_name}\nGuest: ${booking.guest_name}\nOwner: ${booking.owner_phone}`
-        );
+          if (!processResponse.ok) {
+            console.error("Failed to process confirmed booking:", await processResponse.text());
+          } else {
+            console.log("Confirmed booking processed successfully");
+          }
+        } catch (error) {
+          console.error("Error triggering booking-process-confirmed:", error);
+        }
       } else {
         await whatsappService.sendTextMessage(
           booking.owner_phone,
           `❌ Booking cancelled.\n\nBooking ID: ${bookingId}\nGuest: ${booking.guest_name}\nProperty: ${booking.property_name}`
         );
 
-        await whatsappService.sendTextMessage(
-          booking.guest_phone,
-          `We're sorry, but your booking request has been declined by the property owner.\n\nBooking ID: ${bookingId}\nYou will receive a refund within 5-7 business days.`
-        );
+        try {
+          const processUrl = `${supabaseUrl}/functions/v1/booking-process-cancelled`;
+          const processResponse = await fetch(processUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${supabaseServiceKey}`,
+            },
+            body: JSON.stringify({ booking_id: bookingId }),
+          });
 
-        await whatsappService.sendTextMessage(
-          booking.admin_phone,
-          `❌ Booking Cancelled by Owner\n\nBooking ID: ${bookingId}\nProperty: ${booking.property_name}\nGuest: ${booking.guest_name}\nRefund required: ₹${booking.advance_amount}`
-        );
+          if (!processResponse.ok) {
+            console.error("Failed to process cancelled booking:", await processResponse.text());
+          } else {
+            console.log("Cancelled booking processed successfully");
+          }
+        } catch (error) {
+          console.error("Error triggering booking-process-cancelled:", error);
+        }
       }
 
       console.log(`Booking ${bookingId} updated to ${newStatus}`);
