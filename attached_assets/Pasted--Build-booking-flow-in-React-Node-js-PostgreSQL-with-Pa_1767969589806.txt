@@ -1,0 +1,70 @@
+**Build booking flow in React + Node.js + PostgreSQL with Paytm payment and WhatsApp Cloud API automation:**
+
+1. Customer fills booking form and proceeds to Paytm payment.
+2. After successful payment:
+
+   * Create booking record in PostgreSQL
+   * Send WhatsApp message to customer:
+     “Payment successful — booking processing — e-ticket will be sent within 60 minutes”
+3. Send booking request WhatsApp message to Property Owner with buttons:
+
+   * Confirm
+   * Cancel
+4. Send booking request notification to Admin WhatsApp.
+5. Create webhook to receive owner response:
+
+   * If Confirm:
+     a) Generate unique e-ticket link webpage
+     b) e-ticket expires after checkout date
+     c) send WhatsApp confirmation + e-ticket link to customer
+     d) notify admin as confirmed
+   * If Cancel:
+     a) notify customer cancellation/refund message
+     b) notify admin cancellation/refund assistance
+6. Booking database statuses:
+
+   * PAYMENT_SUCCESS
+   * BOOKING_REQUEST_SENT_TO_OWNER
+   * OWNER_CONFIRMED or OWNER_CANCELLED
+   * TICKET_GENERATED or REFUND_REQUIRED
+
+WhatsApp must use approved template messages.
+
+---
+
+> Build complete booking flow using React + Node.js + PostgreSQL with a DEMO payment gateway page (not real Paytm yet).
+> The demo payment page should simulate:
+> – Payment Success
+> – Payment Failed
+> – Payment Pending
+>
+> On simulated success, backend should behave exactly like real Paytm success:
+> – create booking record in DB
+> – run WhatsApp Cloud API message flows
+> – trigger owner confirmation step
+> – generate e-ticket page link on confirmation
+>
+> Later I will replace demo gateway with Paytm All-in-One, so please keep payment logic modular.
+
+---
+
+I will handle Meta Business verification and create WhatsApp Cloud API setup myself.
+Please build integration in Node.js that uses:
+– WhatsApp Cloud API
+– incoming webhooks for owner button replies
+– outgoing template messages to customer, owner, admin.
+
+For now, use environment variables like:
+– WHATSAPP_PHONE_NUMBER_ID
+– WHATSAPP_BUSINESS_ACCOUNT_ID
+– WHATSAPP_ACCESS_TOKEN
+
+I will fill these values later from my Meta account.
+
+ # Remember  :
+
+don’t try to create Meta account
+
+leave credentials empty
+
+code integration normally

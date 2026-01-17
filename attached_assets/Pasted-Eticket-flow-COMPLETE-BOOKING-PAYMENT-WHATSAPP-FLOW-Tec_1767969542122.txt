@@ -1,0 +1,227 @@
+Eticket flow .  
+
+---
+
+# ✅ COMPLETE BOOKING + PAYMENT + WHATSAPP FLOW
+
+## 🏗 Tech stack required
+
+* Frontend → React
+* Backend → Node.js (Express)
+* Database → PostgreSQL
+* Payment → Paytm All-in-One
+* Messaging → WhatsApp Cloud API (Meta)
+* Ticket storage → database with auto-expiring links
+
+---
+
+# 🔁 OVERALL BOOKING STATES
+
+Each booking moves like this:
+
+```
+PAYMENT_PENDING
+PAYMENT_SUCCESS
+BOOKING_REQUEST_SENT_TO_OWNER
+OWNER_CONFIRMED or OWNER_CANCELLED
+TICKET_GENERATED or REFUND_REQUIRED
+```
+
+---
+
+# 🟢 STEP 1 — USER FILLS BOOKING FORM
+
+Form fields:
+
+* Guest Name
+* Guest Mobile Number (WhatsApp enabled)
+* Property ID
+* Property Name
+* Check-In date & time
+* Check-Out date & time
+* Number of guests
+* Advance amount payable
+
+On submit → user goes to **payment page (Paytm demo or real)**
+
+---
+
+# 🟢 STEP 2 — CUSTOMER MAKES PAYMENT
+
+Paytm returns:
+
+* ✔ success
+* ❌ failed
+* ⭕ pending
+
+On **payment success only**:
+
+### Database entry created in PostgreSQL
+
+Store:
+
+* booking_id (auto unique)
+* property_id
+* guest_name
+* guest_phone
+* owner_phone
+* admin_phone
+* checkin
+* checkout
+* advance_paid
+* status = `"PAYMENT_SUCCESS"`
+
+---
+
+# 🟢 STEP 3 — SEND INITIAL WHATSAPP MESSAGE TO CUSTOMER
+
+Immediately after payment success:
+
+Message to **Customer WhatsApp**
+
+> “Your advance payment is successful. We are processing your booking now.
+> You will receive your e-ticket within 60 minutes after property owner confirms availability.”
+
+Status becomes:
+
+```
+BOOKING_REQUEST_SENT_TO_OWNER
+```
+
+---
+
+# 🟢 STEP 4 — SEND BOOKING REQUEST TO PROPERTY OWNER
+
+WhatsApp template includes:
+
+* Property name
+* Guest name
+* Dates
+* Guests count
+* Advance amount
+* Buttons:
+
+  * ✅ Confirm booking
+  * ❌ Cancel booking
+
+---
+
+# 🟢 STEP 5 — SEND BOOKING REQUEST TO ADMIN
+
+Admin receives:
+
+* Property name
+* Property owner name & number
+* Guest name & number
+* Status → **Waiting for owner confirmation**
+
+---
+
+# 🟢 STEP 6 — OWNER RESPONDS VIA WHATSApp BUTTON
+
+Backend receives webhook:
+
+```
+OWNER_CONFIRMED
+or
+OWNER_CANCELLED
+```
+
+---
+
+## 🟢 CASE A — OWNER CONFIRMS BOOKING
+
+System does:
+
+1. Generate **unique e-ticket link**
+
+Example:
+
+```
+https://looncamp.shop/eticket/BOOKING12345
+```
+
+Ticket contains:
+
+* Property name (big)
+* Booking ID
+* Guest name
+* Check-in & check-out
+* Advance paid (small text)
+* Due amount (big text)
+* Host name: LoonCamp.shop
+* Host mobile
+* Map location link
+* Paytm transaction reference if available
+
+Ticket expiry rule:
+
+```
+auto expire after checkout date
+```
+
+2. WhatsApp message to **Customer**
+
+> Booking confirmed 🎉
+> Here is your e-ticket link
+> [ticket link]
+
+3. WhatsApp to **Admin**
+
+> Booking confirmed
+> property + owner + customer details
+> ticket link
+
+4. Update status:
+
+```
+OWNER_CONFIRMED
+TICKET_GENERATED
+```
+
+---
+
+## 🔴 CASE B — OWNER CANCELS BOOKING
+
+System does:
+
+1. Send WhatsApp to **Customer**
+
+> Booking cancelled ❌
+> Reason: slot unavailable / fully booked
+> Advance payment will be refunded.
+
+2. Send WhatsApp to **Admin**
+
+> Booking cancelled by owner
+> Contact customer for refund assistance
+
+3. **No ticket generated**
+
+4. Update status:
+
+```
+OWNER_CANCELLED
+REFUND_REQUIRED
+```
+
+---
+
+# 💰 WhatsApp Cloud API costing per booking
+
+Messages per booking:
+
+1. Payment success → customer
+2. Booking request → owner
+3. Booking request info → admin
+4. Owner confirmation/cancellation → customer
+5. Owner confirmation/cancellation → admin
+
+Approx 5 message templates per booking.
+
+Meta India pricing:
+➡ about ₹0.12 per template message
+➡ Estimated total ≈ **₹0.60 per booking**
+
+
+---

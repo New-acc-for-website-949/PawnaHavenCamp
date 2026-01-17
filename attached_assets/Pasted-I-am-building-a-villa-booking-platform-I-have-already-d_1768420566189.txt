@@ -1,0 +1,59 @@
+I am building a villa booking platform.
+
+I have already developed a "Villa Availability Calendar" component. Now I want the following system implemented:
+
+Goal:
+Each villa owner should have their own availability calendar webpage where they can update daily booking status. When the owner updates availability, it should immediately reflect:
+1) on that villa’s calendar on the main website
+2) inside the admin panel under that property’s details card
+
+System requirements:
+- Create database models for Villas and Availability
+- Each villa should have unique ID and owner ID
+- Availability should support:
+  - today’s status (Available / Booked / Partially Available)
+  - ability to block specific future dates
+  - real-time updates
+
+Owner side:
+- Create login system for villa owners
+- Each owner can only access their own villa calendar
+- Provide UI with:
+  - calendar view
+  - toggle buttons to mark dates as booked or available
+- When owner updates availability:
+  - changes are saved to DB
+  - instantly reflected on main website property calendar
+
+Public website side:
+- Property page should show live availability calendar using same database
+- No caching delay — real-time display
+
+Admin panel:
+- Admin can view and edit availability for any villa
+- In property list, each property card should contain:
+  - button “View Availability Calendar”
+- Admin can override owner’s updates if necessary
+
+Technical:
+- Use my existing tech stack:
+  - React / TypeScript / Vite frontend
+  - Node.js backend
+  - PostgreSQL database
+- Create secure APIs:
+  - GET availability by villaId
+  - POST/PUT update availability by owner
+  - Admin routes should be separate and protected
+
+Additional:
+- Add timestamps for last updated date
+- If owner has not updated availability for 48 hours, mark status as “Needs Update”
+
+Deliverables:
+- database schema
+- backend API routes
+- frontend pages:
+  1) Owner calendar page
+  2) Public villa calendar display
+  3) Admin calendar management
+- Connect all parts together end-to-end
